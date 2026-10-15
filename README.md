@@ -18,7 +18,8 @@ in the [NERC Vocabulary Server](https://vocab.nerc.ac.uk/), [QUDT](https://qudt.
 parsing names or descriptions, for example to choose display defaults, convert units or find comparable data.
 
 > \[!NOTE]
-> This extension has not been released yet. Names and fields may change after review by the STAC community.
+> This extension is a proposal that has not yet been reviewed by the STAC community. Names and fields may change in
+> later versions.
 
 - Examples:
   - [Item example](examples/item.json): A Zarr store with concepts on data cube variables and dimensions

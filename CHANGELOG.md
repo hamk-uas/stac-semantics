@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.1.0] - 2026-10-15
+
 ### Added
 
 - `sem:concepts` with Concept Reference Objects (`uri`, `role`, `match`, `scheme`, `id`, `title`, `description`)
@@ -14,4 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Assets, Item Asset Definitions and Asset Templates
 - JSON Schema, examples and schema tests
 
-[Unreleased]: <https://github.com/hamk-uas/stac-semantics/commits/main>
+[Unreleased]: <https://github.com/hamk-uas/stac-semantics/compare/v0.1.0...HEAD>
+
+[v0.1.0]: <https://github.com/hamk-uas/stac-semantics/tree/v0.1.0>

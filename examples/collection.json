@@ -1,0 +1,139 @@
+{
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/table/v1.3.0/schema.json",
+    "https://hamk-uas.github.io/stac-semantics/v0.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "station-meteorology",
+  "title": "Station meteorology",
+  "description": "Half-hourly meteorological measurements at a forest station, one Parquet file per year.",
+  "license": "CC-BY-4.0",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          24.29,
+          61.84,
+          24.3,
+          61.85
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "item_assets": {
+    "data": {
+      "type": "application/vnd.apache.parquet",
+      "title": "Measurements",
+      "roles": [
+        "data"
+      ],
+      "table:columns": [
+        {
+          "name": "TIMESTAMP",
+          "type": "timestamp",
+          "description": "End of the averaging period (UTC)"
+        },
+        {
+          "name": "TA",
+          "type": "double",
+          "description": "Air temperature at 4 m height",
+          "unit": "Cel",
+          "sem:concepts": [
+            {
+              "uri": "http://vocab.nerc.ac.uk/standard_name/air_temperature/",
+              "role": "variable",
+              "scheme": "http://vocab.nerc.ac.uk/collection/P07/current/",
+              "id": "air_temperature"
+            },
+            {
+              "uri": "http://qudt.org/vocab/quantitykind/Temperature",
+              "role": "property"
+            },
+            {
+              "uri": "http://purl.obolibrary.org/obo/ENVO_00002005",
+              "role": "object_of_interest",
+              "title": "air"
+            },
+            {
+              "uri": "http://qudt.org/vocab/unit/DEG_C",
+              "role": "unit"
+            }
+          ]
+        },
+        {
+          "name": "RH",
+          "type": "double",
+          "description": "Relative humidity at 4 m height",
+          "unit": "%",
+          "sem:concepts": [
+            {
+              "uri": "http://vocab.nerc.ac.uk/standard_name/relative_humidity/",
+              "scheme": "http://vocab.nerc.ac.uk/collection/P07/current/",
+              "id": "relative_humidity"
+            },
+            {
+              "uri": "http://qudt.org/vocab/quantitykind/RelativeHumidity",
+              "role": "property"
+            },
+            {
+              "uri": "http://qudt.org/vocab/unit/PERCENT",
+              "role": "unit"
+            }
+          ]
+        },
+        {
+          "name": "TS_5",
+          "type": "double",
+          "description": "Soil temperature at 5 cm depth",
+          "unit": "Cel",
+          "sem:concepts": [
+            {
+              "uri": "http://vocab.nerc.ac.uk/standard_name/soil_temperature/",
+              "scheme": "http://vocab.nerc.ac.uk/collection/P07/current/",
+              "id": "soil_temperature"
+            },
+            {
+              "uri": "http://qudt.org/vocab/quantitykind/Temperature",
+              "role": "property"
+            },
+            {
+              "uri": "http://purl.obolibrary.org/obo/ENVO_00001998",
+              "role": "object_of_interest",
+              "title": "soil"
+            },
+            {
+              "uri": "http://qudt.org/vocab/unit/DEG_C",
+              "role": "unit"
+            }
+          ]
+        },
+        {
+          "name": "TA_QC",
+          "type": "int8",
+          "description": "Quality flag of TA: 0 good, 1 gap-filled, 2 missing"
+        }
+      ]
+    }
+  },
+  "summaries": {
+    "datetime": {
+      "minimum": "2020-01-01T00:00:00Z",
+      "maximum": "2021-12-31T23:30:00Z"
+    }
+  },
+  "links": [
+    {
+      "href": "https://example.com/examples/collection.json",
+      "rel": "self"
+    }
+  ]
+}

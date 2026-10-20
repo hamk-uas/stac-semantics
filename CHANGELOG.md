@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The JSON Schema has titles and descriptions for every field of the Concept Reference Object and for each `role` and
+  `match` value, so that tools can explain them. `role`, `match` and `type` list their values as `oneOf` of titled
+  constants instead of `enum`. Validation is unchanged.
+
 ## [v0.1.0] - 2026-10-15
 
 ### Added

@@ -18,9 +18,15 @@
     "type": {
       "$comment": "Catalogs are not in scope: they describe no variables.",
       "type": "string",
-      "enum": [
-        "Collection",
-        "Feature"
+      "oneOf": [
+        {
+          "const": "Collection",
+          "title": "Collection"
+        },
+        {
+          "const": "Feature",
+          "title": "Item (GeoJSON Feature)"
+        }
       ]
     },
     "assets": {
@@ -127,6 +133,7 @@
       ],
       "properties": {
         "uri": {
+          "title": "Concept URI",
           "description": "Identifier of the concept, as published by its vocabulary. Compared as an exact string.",
           "allOf": [
             {
@@ -135,33 +142,88 @@
           ]
         },
         "role": {
+          "title": "Role",
           "description": "What part of the variable the concept describes. Roles other than variable and unit follow the I-ADOPT framework.",
           "type": "string",
-          "enum": [
-            "variable",
-            "property",
-            "object_of_interest",
-            "matrix",
-            "context_object",
-            "constraint",
-            "statistical_modifier",
-            "unit"
+          "oneOf": [
+            {
+              "const": "variable",
+              "title": "Variable",
+              "description": "The concept is the variable as a whole, for example a CF standard name or an I-ADOPT variable (I-ADOPT `Variable`)."
+            },
+            {
+              "const": "property",
+              "title": "Property",
+              "description": "The concept is the characteristic of the object of interest that is observed, for example mole fraction (I-ADOPT `hasProperty`)."
+            },
+            {
+              "const": "object_of_interest",
+              "title": "Object of interest",
+              "description": "The concept is the entity whose property is observed, for example methane (I-ADOPT `hasObjectOfInterest`)."
+            },
+            {
+              "const": "matrix",
+              "title": "Matrix",
+              "description": "The concept is the entity in which the object of interest is contained, for example air for methane (I-ADOPT `hasMatrix`)."
+            },
+            {
+              "const": "context_object",
+              "title": "Context object",
+              "description": "The concept is an entity that gives background information about the object of interest (I-ADOPT `hasContextObject`)."
+            },
+            {
+              "const": "constraint",
+              "title": "Constraint",
+              "description": "The concept is a qualifier that confines another component to a particular state, for example \"dissolved\" (I-ADOPT `hasConstraint`)."
+            },
+            {
+              "const": "statistical_modifier",
+              "title": "Statistical modifier",
+              "description": "The concept is a statistical measure applied to the property, for example a maximum (I-ADOPT `hasStatisticalModifier`)."
+            },
+            {
+              "const": "unit",
+              "title": "Unit",
+              "description": "The concept is the unit of the values. Not an I-ADOPT role."
+            }
           ],
           "default": "variable"
         },
         "match": {
+          "title": "Match",
           "description": "How closely the concept fits what the data represent, following the SKOS mapping properties.",
           "type": "string",
-          "enum": [
-            "exact",
-            "close",
-            "broad",
-            "narrow",
-            "related"
+          "oneOf": [
+            {
+              "const": "exact",
+              "title": "Exact match",
+              "description": "The concept is the same as what the values represent (SKOS `exactMatch`)."
+            },
+            {
+              "const": "close",
+              "title": "Close match",
+              "description": "The concept is nearly the same as what the values represent, but not formally identical (SKOS `closeMatch`)."
+            },
+            {
+              "const": "broad",
+              "title": "Broad match",
+              "description": "The concept is broader than what the values represent (SKOS `broadMatch`)."
+            },
+            {
+              "const": "narrow",
+              "title": "Narrow match",
+              "description": "The concept is narrower than what the values represent (SKOS `narrowMatch`)."
+            },
+            {
+              "const": "related",
+              "title": "Related match",
+              "description": "The concept is related to what the values represent in another way (SKOS `relatedMatch`)."
+            }
           ],
           "default": "exact"
         },
         "scheme": {
+          "title": "Concept Scheme",
           "description": "The vocabulary (concept scheme) the concept belongs to.",
           "allOf": [
             {
@@ -170,16 +232,19 @@
           ]
         },
         "id": {
+          "title": "Notation",
           "description": "The concept's notation or code within the scheme.",
           "type": "string",
           "minLength": 1
         },
         "title": {
+          "title": "Title",
           "description": "Human-readable label.",
           "type": "string",
           "minLength": 1
         },
         "description": {
+          "title": "Description",
           "description": "Human-readable explanation.",
           "type": "string",
           "minLength": 1
@@ -190,7 +255,8 @@
           "$comment": "Fields that other extensions add to Concept References carry their prefix."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "A reference to a concept in a published vocabulary or ontology, and how it relates to what the values represent."
     },
     "iri": {
       "$comment": "The pattern requires a scheme for validators that do not check formats.",

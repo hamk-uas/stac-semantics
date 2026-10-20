@@ -203,3 +203,15 @@ test('duplicates: found in nested variables and escaped in JSON Pointers', () =>
     ['/cube:variables/a~1b/sem:concepts/1'],
   );
 });
+
+test('the field, the Concept Reference and every allowed value have a title and a description', () => {
+  const field = schema.definitions['sem:concepts'];
+  const concept = schema.definitions.concept;
+  assert.ok(field.title && field.description, 'sem:concepts');
+  assert.ok(concept.title && concept.description, 'Concept Reference');
+  for (const [name, property] of Object.entries(concept.properties)) {
+    assert.ok(property.title && property.description, name);
+    assert.equal(property.enum, undefined, `${name} lists its values as titled constants instead of enum`);
+    for (const value of property.oneOf ?? []) assert.ok(value.title && value.description, `${name}: ${value.const}`);
+  }
+});
